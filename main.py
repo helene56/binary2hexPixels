@@ -24,6 +24,8 @@ slice1 = binary_string[0:4]
 print(binary_string)
 i = 0
 binary_string_list = []
+
+# should add something that determines the range, now it is set to fit a binary number that is 24 bit
 for n in range(3):
     print(n)
     binary_string_list.append(binary_string[0+i:8+i])
@@ -38,7 +40,7 @@ print(binary_integer_list)
 
 hexadecimal_list = [f"0x{num:02X}" for num in binary_integer_list]
 print(hexadecimal_list)
-
+# will make a function for reading a line and then writing line later
 with open(f"{HEX_FILE_PATH}/new.txt", 'w') as file:
     for value in hexadecimal_list:
         file.write(f"{value} ")
