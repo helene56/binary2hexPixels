@@ -50,7 +50,7 @@ with open(BIN_FILE_PATH, 'r') as file:
                     binary_int_list = turn_8bit(binary_string, binary_string_list_1)
                     hex_list = bit_to_hex(binary_int_list)
                     for value in hex_list:
-                        file_2.write(f"{value} ")
+                        file_2.write(f"{value}, ")
                     file_2.write("\n")
                     print(hex_list)
                     # reinitilaze as empty holders for the next line in file
