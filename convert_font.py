@@ -3,7 +3,7 @@ from PIL import Image, ImageDraw, ImageFont
 import numpy as np
 
 # Load the TTF font
-font_name = 'Danfo-Regular'
+font_name = 'PoetsenOne-Regular'
 font_path = f'./fonts/{font_name}.ttf'  # Replace with the path to your TTF file
 font = TTFont(font_path)
 
@@ -15,7 +15,7 @@ pil_font = ImageFont.truetype(font_path, font_size)
 
 # Characters to convert
 
-characters = ' !"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{{|}}~'
+characters = ' !"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{{|}}~æøå'
 
 # Function to convert image to hex
 def image_to_hex(image):
@@ -23,6 +23,9 @@ def image_to_hex(image):
     pixels = np.array(image)
     hex_data = []
     for row in pixels:
+        # Pack bits into bytes and format as hex
+        # packed_row = np.packbits(np.pad(row, (0, 8 - len(row) % 8), 'constant'))
+        # hex_row = ', '.join(['0x{:02X}'.format(byte) for byte in packed_row]) + ','
         hex_row = ', '.join(['0x{:02X}'.format(byte) for byte in np.packbits(row)]) + ','
         hex_data.append(hex_row)
     return hex_data
@@ -51,7 +54,7 @@ for char in characters:
 # Save the hex data to a file if needed
 with open(f'./hex_files/{font_name}{font_size}.c', 'w') as f:
     f.write('#include "fonts.h"\n')
-    f.write("const uint8_t customFont24_Table [] =\n")
+    f.write(f"const uint8_t {font_name}Font24_Table [] =\n")
     f.write("{\n")
     for char, hex_data in font_hex_data.items():
         f.write(f'//Character: {char}\n')
